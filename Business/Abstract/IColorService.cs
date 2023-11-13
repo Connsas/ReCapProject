@@ -4,14 +4,15 @@ using Entities.Concrete;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Utilities.Results;
 
 namespace Business.Abstract
 {
     internal interface IColorService
     {
-        void AddColor(Color color);
-        void DeleteColor(Color color);
-        void UpdateColor(Color color);
-        Color GetColor(int colorId);
+        IResult AddColor(Color color);
+        IResult DeleteColor(Color color);
+        IResult UpdateColor(Color color);
+        IDataResult<Color> GetColor(int colorId);
     }
 }

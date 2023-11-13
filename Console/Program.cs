@@ -8,13 +8,17 @@ using Entities.Concrete;
 
 namespace ConsoleUI
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-         
-
-           
+            Car car = new Car { CarName = "Deneme1", DailyPrice = 200, Description = "Açıklama1", ModelYear = 2001,};
+            ICarService carService = new CarManager(new EfCarDal());
+            //carService.AddCar(car);
+            foreach (var item in carService.GetCarDetails().Data)
+            {
+                Console.WriteLine(item.CarName);
+            }
         }
     }
 }

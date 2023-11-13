@@ -1,15 +1,14 @@
-﻿using Entities.Concrete;
+﻿using Core.DataAccess;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Core.DataAccess;
-using Core.Entities;
 
 namespace DataAccess.Abstract
 {
-    public interface IColorDal : IEntityRepository<Color>
+    public interface IRentalDal : IEntityRepository<Rental>
     {
     }
 }

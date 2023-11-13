@@ -20,20 +20,22 @@ namespace Business.Concrete
 
         public void AddCar(Car car)
         {
-            if (car.CarName.Length > 2 && car.DailyPrice >= 0)
-            {
-                _carDal.Add(car);
-            }
+            _carDal.Add(car);
         }
 
-        public List<Car> GetCarsByBrandId(int brandId)
+        public void DeleteCar(Car car)
         {
-            return _carDal.GetAll(p => p.BrandId == brandId);
+            _carDal.Delete(car);
         }
 
-        public List<Car> GetCarsByColorId(int colorId)
+        public Car GetCar(int carId)
         {
-            return _carDal.GetAll(p => p.ColorId == colorId);
+            return _carDal.Get(p=> p.CarId == carId);
+        }
+
+        public void UpdateCar(Car car)
+        {
+            _carDal.Update(car);
         }
     }
 }

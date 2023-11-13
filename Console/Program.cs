@@ -4,6 +4,7 @@ using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
+using Entities.Concrete;
 
 namespace ConsoleUI
 {
@@ -11,7 +12,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            ICarService carService = new CarManager(new EfCarDal());
+         
 
            
         }

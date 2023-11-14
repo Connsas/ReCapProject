@@ -8,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    internal interface IRentalService
+    public interface IRentalService
     {
-        public IResult Add(Rental rental);
+        IResult Add(Rental rental);
+        IResult Delete(Rental rental);
+        IResult Update(Rental rental);
+        IDataResult<Rental> Get(int rentalId);
     }
 }

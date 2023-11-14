@@ -11,10 +11,11 @@ namespace Business.Abstract
 {
     public interface ICarService
     {
-        IResult AddCar(Car car);
-        IResult DeleteCar(Car car);
-        IResult UpdateCar(Car car);
-        IDataResult<Car> GetCar(int carId);
+        IResult Add(Car car);
+        IResult Delete(Car car);
+        IResult Update(Car car);
+        IDataResult<Car> Get(int carId);
         IDataResult<List<CarDetailsDto>> GetCarDetails();
+        IDataResult<List<Car>> GetAll();
     }
 }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    internal class RentalManager : IRentalService
+    public class RentalManager : IRentalService
     {
         IRentalDal _rentalDal;
         public RentalManager(IRentalDal rentalDal)
@@ -25,7 +25,24 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.CarAlreadyRented);
             }
             _rentalDal.Add(rental);
-            return new SuccessResult();
+            return new SuccessResult(Messages.RentalAdded);
+        }
+
+        public IResult Delete(Rental rental)
+        {
+            _rentalDal.Delete(rental);
+            return new SuccessResult(Messages.RentalDeleted);
+        }
+
+        public IDataResult<Rental> Get(int rentalId)
+        {
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r=> r.RentalId == rentalId));
+        }
+
+        public IResult Update(Rental rental)
+        {
+            _rentalDal.Update(rental);
+            return new SuccessResult(Messages.RentalUpdated);
         }
     }
 }

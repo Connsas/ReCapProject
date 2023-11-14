@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    internal class ColorManager : IColorService
+    public class ColorManager : IColorService
     {
         IColorDal _colorDal;
 
@@ -20,24 +20,24 @@ namespace Business.Concrete
             _colorDal = colorDal;
         }
 
-        public IResult AddColor(Color color)
+        public IResult Add(Color color)
         {           
             _colorDal.Add(color);
             return new SuccessResult(Messages.ColorAdded);
         }
 
-        public IDataResult<Color> GetColor(int colorId)
+        public IDataResult<Color> Get(int colorId)
         {
             return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == colorId));
         }
 
-        public IResult DeleteColor(Color color)
+        public IResult Delete(Color color)
         {
             _colorDal.Delete(color);
             return new SuccessResult(Messages.ColorDeleted);
         }
 
-        public IResult UpdateColor(Color color)
+        public IResult Update(Color color)
         {
             _colorDal.Update(color);
             return new SuccessResult(Messages.ColorUpdated);

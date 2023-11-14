@@ -8,11 +8,11 @@ using Core.Utilities.Results;
 
 namespace Business.Abstract
 {
-    internal interface IColorService
+    public interface IColorService
     {
-        IResult AddColor(Color color);
-        IResult DeleteColor(Color color);
-        IResult UpdateColor(Color color);
-        IDataResult<Color> GetColor(int colorId);
+        IResult Add(Color color);
+        IResult Delete(Color color);
+        IResult Update(Color color);
+        IDataResult<Color> Get(int colorId);
     }
 }

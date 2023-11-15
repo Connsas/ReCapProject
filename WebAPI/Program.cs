@@ -1,7 +1,10 @@
+using Autofac.Extensions.DependencyInjection;
+using Autofac;
 using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using Business.DependencyResolvers.Autofac;
 
 namespace WebAPI
 {
@@ -17,18 +20,22 @@ namespace WebAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddSingleton<ICarService, CarManager>();
-            builder.Services.AddSingleton<IBrandService, BrandManager>();
-            builder.Services.AddSingleton<IColorService, ColorManager>();
-            builder.Services.AddSingleton<IRentalService, RentalManager>();
-            builder.Services.AddSingleton<ICustomerService, CustomerManager>();
-            builder.Services.AddSingleton<IUserService, UserManager>();
-            builder.Services.AddTransient<ICarDal, EfCarDal>();
-            builder.Services.AddTransient<IBrandDal, EfBrandDal>();
-            builder.Services.AddTransient<IColorDal, EfColorDal>();
-            builder.Services.AddTransient<IRentalDal, EfRentalDal>();
-            builder.Services.AddTransient<ICustomerDal, EfCustomerDal>();
-            builder.Services.AddTransient<IUserDal, EfUserDal>();
+            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory()).ConfigureContainer<ContainerBuilder>(builder =>
+            {
+                builder.RegisterModule(new AutofacBusinessModule());
+            });
+            //builder.Services.AddSingleton<ICarService, CarManager>();
+            //builder.Services.AddSingleton<IBrandService, BrandManager>();
+            //builder.Services.AddSingleton<IColorService, ColorManager>();
+            //builder.Services.AddSingleton<IRentalService, RentalManager>();
+            //builder.Services.AddSingleton<ICustomerService, CustomerManager>();
+            //builder.Services.AddSingleton<IUserService, UserManager>();
+            //builder.Services.AddTransient<ICarDal, EfCarDal>();
+            //builder.Services.AddTransient<IBrandDal, EfBrandDal>();
+            //builder.Services.AddTransient<IColorDal, EfColorDal>();
+            //builder.Services.AddTransient<IRentalDal, EfRentalDal>();
+            //builder.Services.AddTransient<ICustomerDal, EfCustomerDal>();
+            //builder.Services.AddTransient<IUserDal, EfUserDal>();
 
 
             var app = builder.Build();

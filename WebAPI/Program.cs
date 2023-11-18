@@ -5,6 +5,11 @@ using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Business.DependencyResolvers.Autofac;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Core.Utilities.Security.Encryption;
+using Core.Utilities.Security.JWT;
+using Core.Utilities.IoC;
 
 namespace WebAPI
 {
@@ -13,6 +18,23 @@ namespace WebAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidIssuer = tokenOptions.Issuer,
+                        ValidAudience = tokenOptions.Audience,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
+                    };
+                });
 
             // Add services to the container.
 
@@ -24,6 +46,8 @@ namespace WebAPI
             {
                 builder.RegisterModule(new AutofacBusinessModule());
             });
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            ServiceTool.Create(builder.Services);
             //builder.Services.AddSingleton<ICarService, CarManager>();
             //builder.Services.AddSingleton<IBrandService, BrandManager>();
             //builder.Services.AddSingleton<IColorService, ColorManager>();
@@ -48,6 +72,8 @@ namespace WebAPI
             }
 
             app.UseHttpsRedirection();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

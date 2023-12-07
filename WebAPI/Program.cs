@@ -10,6 +10,8 @@ using Microsoft.IdentityModel.Tokens;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
 using Core.Utilities.IoC;
+using Core.DependencyResolvers;
+using Core.Extensions;
 
 namespace WebAPI
 {
@@ -36,6 +38,16 @@ namespace WebAPI
                     };
                 });
 
+            builder.Services.AddCors();
+
+
+            ServiceTool.Create(builder.Services);
+
+            builder.Services.AddDependencyResolvers(new ICoreModule[]
+            {
+                new CoreModule()
+            });
+
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -47,7 +59,6 @@ namespace WebAPI
                 builder.RegisterModule(new AutofacBusinessModule());
             });
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            ServiceTool.Create(builder.Services);
             //builder.Services.AddSingleton<ICarService, CarManager>();
             //builder.Services.AddSingleton<IBrandService, BrandManager>();
             //builder.Services.AddSingleton<IColorService, ColorManager>();
@@ -70,6 +81,8 @@ namespace WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
 
             app.UseHttpsRedirection();
 

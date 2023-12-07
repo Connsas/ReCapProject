@@ -22,7 +22,7 @@ namespace WebAPI.Controllers
             var result = _userService.Get(id);
             if (result.Success)
             {
-                Ok(result);
+                return Ok(result);
             }
             return BadRequest(result);
         }
@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
             var result = _userService.Add(user);
             if (result.Success)
             {
-                Ok(result);
+                return Ok(result);
             }
             return BadRequest(result);
         }
@@ -44,7 +44,7 @@ namespace WebAPI.Controllers
             var result = _userService.Update(user);
             if (result.Success)
             {
-                Ok(result);
+                return Ok(result);
             }
             return BadRequest(result);
         }
@@ -55,7 +55,7 @@ namespace WebAPI.Controllers
             var result = _userService.Delete(user);
             if (result.Success)
             {
-                Ok(result);
+                return Ok(result);
             }
             return BadRequest(result);
         }

@@ -26,7 +26,7 @@ namespace Business.Concrete
             _carImageService = carImageService;
         }
 
-        [SecuredOperation("product.add,admin")]
+        //[SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
@@ -44,10 +44,15 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<Car>(_carDal.Get(p=> p.CarId == carId));
         }
-
+        //[SecuredOperation("car.add,admin")]
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
+        }
+
+        public IDataResult<List<CarDetailsDto>> GetAllCarDetails()
+        {
+            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails());
         }
 
         public IDataResult<List<CarDetailsDto>> GetCarDetails()

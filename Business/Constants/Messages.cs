@@ -29,12 +29,12 @@ namespace Business.Constants
         public static string RentalDeleted = "Kiralama Başarıyla Silindi.";
         public static string RentalUpdated = "Kiralama Başarıyla Güncellendi.";
         public static string CarImageAmountExceeded = "Bir araca ait resim sınırı en fazla 5 olabilir.";
-        internal static string? AuthorizationDenied;
-        internal static string UserRegistered;
-        internal static User UserNotFound;
-        internal static User PasswordError;
-        internal static string SuccessfulLogin;
-        internal static string UserAlreadyExists;
-        internal static string AccessTokenCreated;
+        public static string AuthorizationDenied = "Yetkiniz yok.";
+        public static string UserRegistered;
+        public static string UserNotFound;
+        public static string PasswordError;
+        public static string SuccessfulLogin;
+        public static string UserAlreadyExists;
+        public static string AccessTokenCreated;
     }
 }

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -37,6 +38,11 @@ namespace Business.Concrete
         public IDataResult<Rental> Get(int rentalId)
         {
             return new SuccessDataResult<Rental>(_rentalDal.Get(r=> r.RentalId == rentalId));
+        }
+
+        public IDataResult<List<CarRentalDto>> GetAllRentalDetails()
+        {
+            return new SuccessDataResult<List<CarRentalDto>>(_rentalDal.GetCarRentalDetails());
         }
 
         public IResult Update(Rental rental)

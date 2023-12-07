@@ -14,5 +14,6 @@ namespace Business.Abstract
         IResult Delete(Brand brand);
         IResult Update(Brand brand);
         IDataResult<Brand> Get(int brandId);
+        IDataResult<List<Brand>> GetAll();
     }
 }
